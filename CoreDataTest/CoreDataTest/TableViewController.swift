@@ -33,6 +33,8 @@ class TableViewController: UITableViewController {
         refreshControl?.endRefreshing()
 
     }
+
+    @IBAction func retrievePerson(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
