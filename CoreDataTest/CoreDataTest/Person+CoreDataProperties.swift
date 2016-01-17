@@ -16,5 +16,6 @@ extension Person {
 
     @NSManaged var firstName: String?
     @NSManaged var lastName: String?
+    @NSManaged var uuid: String?
 
 }

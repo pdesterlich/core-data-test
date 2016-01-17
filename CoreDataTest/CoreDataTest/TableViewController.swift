@@ -14,24 +14,14 @@ class TableViewController: UITableViewController {
     // retrieve the managedObjectContext
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    var people: [Person] = []
+    var people: [PersonModel] = []
     
     func refreshList() {
-        let fetchRequest = NSFetchRequest(entityName: "Person")
-        
-        do {
-            let result = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Person]
-            
-            people = result
-            
-        } catch let error as NSError {
-            print("Could not get: " + error.description)
-        }
+        people = PersonModel.list()
         
         tableView.reloadData()
         
         refreshControl?.endRefreshing()
-
     }
 
     @IBAction func retrievePerson(segue: UIStoryboardSegue) {}
@@ -75,9 +65,9 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        let person: Person = people[indexPath.row]
+        let person: PersonModel = people[indexPath.row]
         
-        cell.textLabel?.text = person.firstName! + " " + person.lastName!
+        cell.textLabel?.text = person.firstName + " " + person.lastName
 
         return cell
     }

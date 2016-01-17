@@ -16,6 +16,7 @@
 		E50CBA9A1C4BCBAC00FF8C91 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CBA981C4BCBAC00FF8C91 /* Person+CoreDataProperties.swift */; };
 		E50CBA9B1C4BCBAC00FF8C91 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50CBA991C4BCBAC00FF8C91 /* Person.swift */; };
 		E5239DC51C4BD466007CE996 /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5239DC41C4BD466007CE996 /* PersonViewController.swift */; };
+		E5758E681C4BDD1700B88988 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5758E671C4BDD1700B88988 /* PersonModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E50CBA981C4BCBAC00FF8C91 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E50CBA991C4BCBAC00FF8C91 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		E5239DC41C4BD466007CE996 /* PersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
+		E5758E671C4BDD1700B88988 /* PersonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				E50CBA881C4BC9B200FF8C91 /* CoreDataTest.xcdatamodeld */,
 				E50CBA961C4BCA6C00FF8C91 /* TableViewController.swift */,
 				E5239DC41C4BD466007CE996 /* PersonViewController.swift */,
+				E5758E671C4BDD1700B88988 /* PersonModel.swift */,
 			);
 			path = CoreDataTest;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E50CBA9B1C4BCBAC00FF8C91 /* Person.swift in Sources */,
+				E5758E681C4BDD1700B88988 /* PersonModel.swift in Sources */,
 				E5239DC51C4BD466007CE996 /* PersonViewController.swift in Sources */,
 				E50CBA9A1C4BCBAC00FF8C91 /* Person+CoreDataProperties.swift in Sources */,
 				E50CBA8A1C4BC9B200FF8C91 /* CoreDataTest.xcdatamodeld in Sources */,
