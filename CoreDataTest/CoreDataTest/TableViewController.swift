@@ -17,13 +17,19 @@ class TableViewController: UITableViewController {
     var people: [PersonModel] = []
     
     func refreshList() {
-        people = PersonModel.list()
+        people = PersonModel.list(managedObjectContext)
         
         tableView.reloadData()
         
         refreshControl?.endRefreshing()
     }
 
+    func savePerson(person: PersonModel) {
+        person.save(managedObjectContext)
+        
+        refreshList()
+    }
+    
     @IBAction func retrievePerson(segue: UIStoryboardSegue) {}
     
     override func viewDidLoad() {
@@ -63,7 +69,7 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath)
 
         let person: PersonModel = people[indexPath.row]
         
@@ -107,14 +113,20 @@ class TableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "addPersonSegue" {
+            let destController: PersonViewController = segue.destinationViewController as! PersonViewController
+            destController.person = PersonModel()
+        }
+        if segue.identifier == "editPersonSegue" {
+            let destController: PersonViewController = segue.destinationViewController as! PersonViewController
+            let indexPath = self.tableView.indexPathForSelectedRow
+            let person = people[indexPath!.row]
+            destController.person = person
+        }
     }
-    */
 
 }

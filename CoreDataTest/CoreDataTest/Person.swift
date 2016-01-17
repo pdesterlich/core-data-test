@@ -12,6 +12,10 @@ import CoreData
 
 class Person: NSManagedObject {
 
-// Insert code here to add functionality to your managed object subclass
+    func fromModel(source: PersonModel) {
+        self.uuid = source.uuid
+        self.firstName = source.firstName
+        self.lastName = source.lastName
+    }
 
 }

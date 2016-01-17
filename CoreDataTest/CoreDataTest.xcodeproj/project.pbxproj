@@ -64,17 +64,17 @@
 		E50CBA801C4BC9B200FF8C91 /* CoreDataTest */ = {
 			isa = PBXGroup;
 			children = (
-				E50CBA981C4BCBAC00FF8C91 /* Person+CoreDataProperties.swift */,
-				E50CBA991C4BCBAC00FF8C91 /* Person.swift */,
 				E50CBA811C4BC9B200FF8C91 /* AppDelegate.swift */,
-				E50CBA851C4BC9B200FF8C91 /* Main.storyboard */,
 				E50CBA8B1C4BC9B200FF8C91 /* Assets.xcassets */,
-				E50CBA8D1C4BC9B200FF8C91 /* LaunchScreen.storyboard */,
-				E50CBA901C4BC9B200FF8C91 /* Info.plist */,
 				E50CBA881C4BC9B200FF8C91 /* CoreDataTest.xcdatamodeld */,
-				E50CBA961C4BCA6C00FF8C91 /* TableViewController.swift */,
-				E5239DC41C4BD466007CE996 /* PersonViewController.swift */,
+				E50CBA901C4BC9B200FF8C91 /* Info.plist */,
+				E50CBA8D1C4BC9B200FF8C91 /* LaunchScreen.storyboard */,
+				E50CBA851C4BC9B200FF8C91 /* Main.storyboard */,
+				E50CBA991C4BCBAC00FF8C91 /* Person.swift */,
+				E50CBA981C4BCBAC00FF8C91 /* Person+CoreDataProperties.swift */,
 				E5758E671C4BDD1700B88988 /* PersonModel.swift */,
+				E5239DC41C4BD466007CE996 /* PersonViewController.swift */,
+				E50CBA961C4BCA6C00FF8C91 /* TableViewController.swift */,
 			);
 			path = CoreDataTest;
 			sourceTree = "<group>";

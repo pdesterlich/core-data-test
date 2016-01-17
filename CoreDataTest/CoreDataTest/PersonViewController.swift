@@ -10,9 +10,17 @@ import UIKit
 
 class PersonViewController: UIViewController {
 
+    var person: PersonModel = PersonModel()
+    
+    @IBOutlet weak var textFirstName: UITextField!
+    @IBOutlet weak var textLastName: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        textFirstName.text = person.firstName
+        textLastName.text = person.lastName
+        
         // Do any additional setup after loading the view.
     }
 
@@ -22,14 +30,15 @@ class PersonViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        person.firstName = textFirstName.text!
+        person.lastName = textLastName.text!
+
+        let destController: TableViewController = segue.destinationViewController as! TableViewController
+        destController.savePerson(person)
     }
-    */
 
 }

@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Core Data Test-->
+        <!--People-->
         <scene sceneID="2NE-je-we1">
             <objects>
                 <tableViewController id="rW6-FV-HtS" customClass="TableViewController" customModule="CoreDataTest" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,6 +31,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Bux-Gs-S7n" kind="show" identifier="editPersonSegue" id="7VA-Bh-uI2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -38,10 +41,10 @@
                             <outlet property="delegate" destination="rW6-FV-HtS" id="jLI-cZ-4yl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Core Data Test" id="lqf-7y-dNT">
+                    <navigationItem key="navigationItem" title="People" id="lqf-7y-dNT">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="X7t-23-yYk">
                             <connections>
-                                <segue destination="Bux-Gs-S7n" kind="show" id="rHu-cI-iMC"/>
+                                <segue destination="Bux-Gs-S7n" kind="show" identifier="addPersonSegue" id="rHu-cI-iMC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -120,6 +123,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textFirstName" destination="oXL-lB-78Q" id="PaR-7d-cc7"/>
+                        <outlet property="textLastName" destination="ux1-v8-aGg" id="e5G-bt-TqR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0L4-xr-OVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DrU-p7-sqo" userLabel="Exit" sceneMemberID="exit"/>
@@ -146,4 +153,7 @@
             <point key="canvasLocation" x="459" y="220"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="7VA-Bh-uI2"/>
+    </inferredMetricsTieBreakers>
 </document>
