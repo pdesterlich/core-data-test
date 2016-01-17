@@ -297,6 +297,7 @@
 				E50CBA951C4BC9B200FF8C91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

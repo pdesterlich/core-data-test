@@ -7,11 +7,40 @@
 //
 
 import UIKit
+import CoreData
 
 class TableViewController: UITableViewController {
 
+    // retrieve the managedObjectContext
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var people: [Person] = []
+    
+    func refreshList() {
+        let fetchRequest = NSFetchRequest(entityName: "Person")
+        
+        do {
+            let result = try managedObjectContext.executeFetchRequest(fetchRequest) as! [Person]
+            
+            people = result
+            
+        } catch let error as NSError {
+            print("Could not get: " + error.description)
+        }
+        
+        tableView.reloadData()
+        
+        refreshControl?.endRefreshing()
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("refreshList"), forControlEvents: .ValueChanged)
+        
+        self.refreshControl = refreshControl
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -20,6 +49,10 @@ class TableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        refreshList()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -29,23 +62,23 @@ class TableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return people.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let person: Person = people[indexPath.row]
+        
+        cell.textLabel?.text = person.firstName! + " " + person.lastName!
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
