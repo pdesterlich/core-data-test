@@ -32,48 +32,59 @@ class PersonModel {
         self._saved = true
     }
     
+    func getManagedObject(moc: NSManagedObjectContext) -> Person? {
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", self.uuid)
+        
+        do {
+            let results = try moc.executeFetchRequest(fetchRequest) as! [Person]
+            
+            if results.count > 0 {
+                let person = results[0]
+                
+                return person
+            } else {
+                print("Person not found")
+                return nil
+            }
+        } catch let error as NSError {
+            print("Could not get: " + error.description)
+            return nil
+        }
+    }
+    
     func save(moc: NSManagedObjectContext) -> Bool {
         if (!self._saved) {
             return insert(moc)
         } else {
-            let fetchRequest = NSFetchRequest(entityName: entityName)
-            fetchRequest.predicate = NSPredicate(format: "uuid == %@", self.uuid)
             
-            do {
-                let results = try moc.executeFetchRequest(fetchRequest) as! [Person]
+            if let person: Person = getManagedObject(moc) {
+                person.fromModel(self)
 
-                if results.count > 0 {
-                    let person = results[0]
+                do {
+                    try moc.save()
                     
-                    person.fromModel(self);
-                    
-                    do {
-                        try moc.save()
-                        
-                        return true
-                    } catch let error as NSError {
-                        print("Could not save: " + error.description)
-                        return false
-                    }
-                } else {
-                    print("Person not found")
+                    return true
+                } catch let error as NSError {
+                    print("Could not save: " + error.description)
                     return false
                 }
-            } catch let error as NSError {
-                print("Could not get: " + error.description)
+            } else {
                 return false
             }
         }
     }
     
     func insert(moc: NSManagedObjectContext) -> Bool {
-        let entity = NSEntityDescription.entityForName("Person", inManagedObjectContext: moc)
+        let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: moc)
         let person = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: moc) as! Person
         
         person.fromModel(self);
         
         do {
             try moc.save()
+            
+            self._saved = true
             
             return true
         } catch let error as NSError {
@@ -83,30 +94,18 @@ class PersonModel {
     }
     
     func delete(moc: NSManagedObjectContext) -> Bool {
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-        fetchRequest.predicate = NSPredicate(format: "uuid == %@", self.uuid)
-        
-        do {
-            let results = try moc.executeFetchRequest(fetchRequest) as! [Person]
+        if let person: Person = getManagedObject(moc) {
+            moc.deleteObject(person)
             
-            if results.count > 0 {
-                let person = results[0]
-                moc.deleteObject(person)
+            do {
+                try moc.save()
                 
-                do {
-                    try moc.save()
-                    
-                    return true
-                } catch let error as NSError {
-                    print("Could not delete: " + error.description)
-                    return false
-                }
-            } else {
-                print("Person not found")
+                return true
+            } catch let error as NSError {
+                print("Could not delete: " + error.description)
                 return false
             }
-        } catch let error as NSError {
-            print("Could not get: " + error.description)
+        } else {
             return false
         }
     }
@@ -114,7 +113,6 @@ class PersonModel {
     class func list(moc: NSManagedObjectContext) -> [PersonModel] {
         var list: [PersonModel] = []
         
-        // let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Person")
         
         do {
