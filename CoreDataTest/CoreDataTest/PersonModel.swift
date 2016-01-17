@@ -37,9 +37,7 @@ class PersonModel {
             return insert(moc)
         } else {
             let fetchRequest = NSFetchRequest(entityName: entityName)
-            let predicate = NSPredicate(format: "uuid == %@", self.uuid)
-            
-            fetchRequest.predicate = predicate
+            fetchRequest.predicate = NSPredicate(format: "uuid == %@", self.uuid)
             
             do {
                 let results = try moc.executeFetchRequest(fetchRequest) as! [Person]
@@ -84,8 +82,33 @@ class PersonModel {
         }
     }
     
-    func delete() {
-        // DoSomething(TM)
+    func delete(moc: NSManagedObjectContext) -> Bool {
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", self.uuid)
+        
+        do {
+            let results = try moc.executeFetchRequest(fetchRequest) as! [Person]
+            
+            if results.count > 0 {
+                let person = results[0]
+                moc.deleteObject(person)
+                
+                do {
+                    try moc.save()
+                    
+                    return true
+                } catch let error as NSError {
+                    print("Could not delete: " + error.description)
+                    return false
+                }
+            } else {
+                print("Person not found")
+                return false
+            }
+        } catch let error as NSError {
+            print("Could not get: " + error.description)
+            return false
+        }
     }
     
     class func list(moc: NSManagedObjectContext) -> [PersonModel] {
